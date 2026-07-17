@@ -208,9 +208,9 @@
       border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden
     }
     .sc .sc-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-    .sc .sc-bg img{width:100%;height:100%;object-fit:cover;opacity:0.25;transition:opacity 0.4s}
-    .sc:hover .sc-bg img{opacity:0.35}
-    .sc .sc-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(9,9,11,0.65) 20%,transparent 50%,rgba(9,9,11,0.65) 80%)}
+    .sc .sc-bg img{width:100%;height:100%;object-fit:cover;opacity:0.2;transition:opacity 0.4s}
+    .sc:hover .sc-bg img{opacity:0.3}
+    .sc .sc-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(9,9,11,0.7) 20%,transparent 50%,rgba(9,9,11,0.7) 80%)}
     .sc:hover{transform:translateY(-3px);border-color:rgba(168,85,255,0.15)}
     .sc .ic,.sc h4,.sc .sd{position:relative;z-index:1}
     .sc .ic{width:36px;height:36px;border-radius:8px;background:rgba(168,85,255,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:0.8rem;font-size:0.9rem;color:var(--primary)}
@@ -339,8 +339,6 @@
       #customCursor,#snowTrail{display:none!important}
       body{cursor:auto}
       .btn,.sdot,.hamburger{cursor:pointer}
-      #contactBtn{left:1rem;bottom:1rem;width:44px;height:44px;font-size:1rem}
-      #contactPopup{left:1rem;bottom:5rem;width:280px}
     }
     @media(max-width:480px){
       .hero-actions{flex-direction:column;align-items:stretch}
@@ -354,42 +352,7 @@
     #skills{background:linear-gradient(180deg,var(--bg) 0%,#070f15 50%,var(--bg) 100%)}
     #testimonials{background:linear-gradient(180deg,var(--bg) 0%,#0e0718 50%,var(--bg) 100%)}
 
-    /* Contact Popup */
-    #contactBtn{
-      position:fixed;bottom:2rem;left:2rem;z-index:9999;
-      width:52px;height:52px;border-radius:50%;
-      background:var(--g1);border:none;color:#fff;font-size:1.2rem;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;box-shadow:0 4px 20px rgba(168,85,255,0.3);
-      transition:all 0.3s;
-      display:none
-    }
-    #contactBtn:hover{transform:scale(1.08)}
-    #contactPopup{
-      position:fixed;bottom:5.5rem;left:2rem;z-index:9998;
-      width:300px;background:var(--surface);border-radius:var(--radius);
-      border:1px solid var(--border);padding:1.2rem;
-      display:none;box-shadow:0 10px 40px rgba(0,0,0,0.4);animation:cp 0.3s ease
-    }
-    #contactPopup.open{display:block}
-    @keyframes cp{from{opacity:0;transform:translateY(10px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-    #contactPopup h4{font-size:0.85rem;color:#fff;margin-bottom:0.6rem}
-    #contactPopup .fg{margin-bottom:0.5rem}
-    #contactPopup .fg label{display:block;font-size:0.65rem;font-weight:600;margin-bottom:0.2rem;color:var(--muted)}
-    #contactPopup .fg input,#contactPopup .fg textarea{
-      width:100%;padding:0.5rem 0.7rem;background:rgba(255,255,255,0.025);
-      border:1px solid var(--border);border-radius:6px;color:#fff;
-      font-family:inherit;font-size:0.78rem;transition:border-color 0.2s;outline:none
-    }
-    #contactPopup .fg input:focus,#contactPopup .fg textarea:focus{border-color:var(--primary)}
-    #contactPopup .fg textarea{resize:vertical;min-height:60px}
-    #contactPopup .btn{width:100%;justify-content:center;padding:0.5rem 1rem;font-size:0.78rem}
-    #contactPopup .close-popup{
-      position:absolute;top:0.5rem;right:0.5rem;width:24px;height:24px;
-      border-radius:50%;background:rgba(255,255,255,0.03);border:none;
-      color:var(--muted);font-size:0.8rem;display:flex;align-items:center;justify-content:center;cursor:pointer
-    }
-    #contactPopup .close-popup:hover{background:rgba(244,63,94,0.2);color:#fff}
+
 
     /* Reduced motion preferences */
     @media(prefers-reduced-motion:reduce){
@@ -613,18 +576,6 @@
   </div>
 </section>
 
-<!-- Contact (floating button + popup) -->
-<button id="contactBtn" onclick="toggleContact()"><i class="fas fa-comment-dots"></i></button>
-<div id="contactPopup">
-  <button class="close-popup" onclick="toggleContact()">&times;</button>
-  <form id="contactFormPopup">
-    <div class="fg"><label>Name</label><input type="text" id="namePopup" placeholder="Your name" required></div>
-    <div class="fg"><label>Email</label><input type="email" id="emailPopup" placeholder="your@email.com" required></div>
-    <div class="fg"><label>Message</label><textarea id="messagePopup" placeholder="Your message..." required></textarea></div>
-    <div class="fg"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button></div>
-  </form>
-</div>
-
 
 <footer>
   <p>&copy; 2026 Ashutosh Mishra</p>
@@ -701,27 +652,12 @@ tc.forEach((_,i)=>{const d=document.createElement('button');d.className='sdot'+(
 function gs(i){cs=i;tt.style.transform='translateX(-'+i*100+'%)';sd.querySelectorAll('.sdot').forEach((d,j)=>d.classList.toggle('active',j===i))}
 setInterval(()=>gs((cs+1)%tc.length),4500);
 
-// Contact Popup
-function toggleContact(){document.getElementById('contactPopup').classList.toggle('open')}
-document.getElementById('contactFormPopup').addEventListener('submit',e=>{
-  e.preventDefault();
-  const n=document.getElementById('namePopup').value.trim();
-  const em=document.getElementById('emailPopup').value.trim();
-  const m=document.getElementById('messagePopup').value.trim();
-  if(n&&em&&m){
-    window.location.href='mailto:Mishra.ashutosh.2217@gmail.com?subject=Portfolio Inquiry from '+n+'&body='+encodeURIComponent(m+'\n\n— '+n+'\n'+em);
-    toggleContact();
-  }
-});
-
 // Download CV
 function downloadCV(){const a=document.createElement('a');a.href='Ashutosh_Mishra_CV.pdf';a.download='Ashutosh_Mishra_CV.pdf';document.body.appendChild(a);a.click();document.body.removeChild(a)}
 document.getElementById('downloadCV').addEventListener('click',e=>{e.preventDefault();downloadCV()});
 
 // Touch device detection
 if('ontouchstart' in window){document.body.style.cursor='auto'}
-// Show contact button on all devices
-document.getElementById('contactBtn').style.display='flex'
 </script>
 </body>
 </html>
