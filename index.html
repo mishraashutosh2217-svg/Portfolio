@@ -47,8 +47,8 @@
       position:absolute;pointer-events:none;animation:flyAround linear infinite;will-change:transform;opacity:0
     }
     @keyframes flyAround{
-      0%{transform:translate(0,0) scale(1)}10%{opacity:0.5}
-      90%{opacity:0.3}100%{transform:translate(var(--tx),var(--ty)) scale(0.3);opacity:0}
+      0%{transform:translate(0,0) scale(1)}10%{opacity:0.8}
+      90%{opacity:0.6}100%{transform:translate(var(--tx),var(--ty)) scale(0.3);opacity:0}
     }
 
     /* Nav */
@@ -66,7 +66,7 @@
       background:var(--g1);display:flex;align-items:center;justify-content:center;
       font-weight:800;font-size:0.85rem;color:#fff;flex-shrink:0
     }
-    .logo-text{font-size:1rem;font-weight:700;color:#fff;letter-spacing:-0.3px}
+    .logo-text{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:1px;text-transform:uppercase}
     .logo-text span{color:var(--primary)}
     .nav-links{display:flex;gap:1.2rem;list-style:none;align-items:center}
     .nav-links a{
@@ -116,10 +116,10 @@
     }
     .hero-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--emerald, #10b981);animation:pulse 1.5s infinite;display:inline-block}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
-    .hero h1{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
-    .hero h1 .hl1{display:block;color:#fff}
-    .hero h1 .hl2{display:block;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .hero h1 .hl3{display:block;color:var(--muted);font-weight:400;font-size:0.35em;letter-spacing:3px;text-transform:uppercase;margin-top:0.4rem}
+    .hero h1{font-size:clamp(2.4rem,6.5vw,5rem);font-weight:900;line-height:1.05;margin-bottom:1rem;letter-spacing:-1px}
+    .hero h1 .hl1{display:block;color:#fff;text-shadow:0 0 40px rgba(168,85,255,0.15)}
+    .hero h1 .hl2{display:block;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.15em}
+    .hero h1 .hl3{display:block;color:var(--muted);font-weight:500;font-size:0.35em;letter-spacing:4px;text-transform:uppercase;margin-top:0.5rem}
     .hero p{font-size:0.95rem;color:var(--muted);max-width:520px;margin:0 auto 2rem;line-height:1.7}
     .hero-actions{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap}
     .btn{
@@ -170,21 +170,20 @@
       position:absolute;bottom:-0.5rem;right:-0.5rem;
       background:rgba(24,24,27,0.95);backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
-      border:1px solid var(--border);padding:1rem;border-radius:var(--radius);text-align:center;min-width:100px
+      border:1px solid var(--primary);padding:1.2rem;border-radius:var(--radius);text-align:center;min-width:110px;
+      box-shadow:0 0 30px rgba(168,85,255,0.15),inset 0 0 20px rgba(168,85,255,0.05)
     }
-    .about-img .badge .big{font-size:1.5rem;font-weight:800;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .about-img .badge .sm{font-size:0.68rem;color:var(--muted)}
-    .about-txt h3{font-size:1.4rem;margin-bottom:0.8rem}
-    .about-txt p{color:var(--muted);margin-bottom:0.8rem;line-height:1.7;font-size:0.88rem}
-    .about-details{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:1rem}
-    .about-detail{
-      display:flex;gap:0.6rem;align-items:flex-start;
-      padding:0.6rem;border-radius:8px;transition:background 0.2s
+    .about-img .badge .big{font-size:1.6rem;font-weight:900;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .about-img .badge .sm{font-size:0.68rem;color:#fff;opacity:0.7}
+    .about-txt h3{font-size:1.6rem;margin-bottom:0.8rem;font-weight:800}
+    .about-txt p{color:var(--muted);margin-bottom:0.8rem;line-height:1.8;font-size:0.9rem}
+    .about-txt .hl{color:var(--primary);font-weight:600}
+    .about-txt .hl-g{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+    .about-txt .tag-skill{
+      display:inline-block;padding:0.15rem 0.6rem;border-radius:50px;
+      font-size:0.72rem;font-weight:500;margin:0.1rem 0.15rem;
+      background:rgba(168,85,255,0.08);color:var(--primary);border:1px solid rgba(168,85,255,0.12)
     }
-    .about-detail:hover{background:rgba(168,85,255,0.04)}
-    .about-detail i{color:var(--primary);font-size:0.85rem;margin-top:2px}
-    .about-detail strong{display:block;font-size:0.78rem;color:#fff}
-    .about-detail span{font-size:0.72rem;color:var(--muted)}
     
     /* Skills */
     .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
@@ -193,23 +192,18 @@
       border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden
     }
     .sc .sc-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-    .sc .sc-bg img{width:100%;height:100%;object-fit:cover;opacity:0.04;transition:opacity 0.4s}
-    .sc:hover .sc-bg img{opacity:0.08}
-    .sc .sc-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--surface) 30%,transparent 60%,var(--surface) 100%)}
+    .sc .sc-bg img{width:100%;height:100%;object-fit:cover;opacity:0.12;transition:opacity 0.4s}
+    .sc:hover .sc-bg img{opacity:0.2}
+    .sc .sc-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(9,9,11,0.85) 20%,transparent 50%,rgba(9,9,11,0.85) 80%)}
     .sc:hover{transform:translateY(-3px);border-color:rgba(168,85,255,0.15)}
-    .sc .ic,.sc h4,.sc ul,.sc .sb-wrap{position:relative;z-index:1}
+    .sc .ic,.sc h4,.sc .sd{position:relative;z-index:1}
     .sc .ic{width:36px;height:36px;border-radius:8px;background:rgba(168,85,255,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:0.8rem;font-size:0.9rem;color:var(--primary)}
     .sc:nth-child(2) .ic{color:var(--secondary);background:rgba(244,63,94,0.06)}
     .sc:nth-child(3) .ic{color:var(--accent);background:rgba(6,182,212,0.06)}
     .sc:nth-child(4) .ic{color:var(--gold);background:rgba(234,179,8,0.06)}
-    .sc h4{font-size:0.9rem;margin-bottom:0.5rem;color:#fff}
-    .sc ul{list-style:none;display:flex;flex-wrap:wrap;gap:0.3rem}
-    .sc ul li{background:rgba(255,255,255,0.03);padding:0.2rem 0.6rem;border-radius:50px;font-size:0.7rem;color:var(--muted)}
-    .sb-wrap{margin-top:0.8rem}
-    .sb-lbl{display:flex;justify-content:space-between;font-size:0.7rem;margin-bottom:0.25rem}
-    .sb-lbl span:last-child{color:var(--primary);font-weight:600}
-    .sb{height:3px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden}
-    .sb-fill{height:100%;border-radius:3px;background:var(--g1);width:0;transition:width 1s cubic-bezier(0.22,1,0.36,1)}
+    .sc h4{font-size:0.95rem;margin-bottom:0.6rem;color:#fff}
+    .sc .sd{font-size:0.8rem;color:var(--muted);line-height:1.7}
+    .sc .sd strong{color:#fff;font-weight:600}
 
     /* Experience */
     .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
@@ -232,22 +226,24 @@
     .ec .body ul li{font-size:0.78rem;color:var(--muted);margin-bottom:0.25rem}
 
     /* Projects */
-    .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .proj-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
     .pc{
       background:var(--surface);border-radius:var(--radius);overflow:hidden;
-      border:1px solid var(--border);transition:all 0.3s;cursor:pointer
+      border:1px solid var(--border);transition:all 0.3s;display:grid;grid-template-columns:1fr 1.5fr;min-height:220px
     }
     .pc:hover{transform:translateY(-4px);border-color:rgba(168,85,255,0.12)}
-    .pc .th{height:160px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(168,85,255,0.08);position:relative;overflow:hidden}
+    .pc .th{height:auto;background:var(--surface);position:relative;overflow:hidden;min-height:220px}
     .pc .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
     .pc:hover .th img{transform:scale(1.06)}
-    .pc .th::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--surface) 20%,transparent 60%);z-index:1}
-    .pc .th i{position:relative;z-index:2;opacity:0.3;transition:opacity 0.3s}
-    .pc:hover .th i{opacity:0.6}
-    .pc .bd{padding:1.2rem}
-    .pc .bd .pt{font-size:0.65rem;font-weight:600;text-transform:uppercase;color:var(--accent);margin-bottom:0.25rem;letter-spacing:1px}
-    .pc .bd h4{font-size:0.9rem;margin-bottom:0.25rem;color:#fff}
-    .pc .bd p{font-size:0.78rem;color:var(--muted);line-height:1.5}
+    .pc .th::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent,var(--surface));z-index:1}
+    .pc .bd{padding:1.5rem;display:flex;flex-direction:column;justify-content:center}
+    .pc .bd .pt{font-size:0.65rem;font-weight:600;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;letter-spacing:1px}
+    .pc .bd h4{font-size:1.1rem;margin-bottom:0.5rem;color:#fff}
+    .pc .bd p{font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:0.5rem}
+    .pc .bd ul{padding-left:1.2rem;list-style:none}
+    .pc .bd ul li{font-size:0.78rem;color:var(--muted);margin-bottom:0.2rem;position:relative;padding-left:1rem}
+    .pc .bd ul li::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;left:0;color:var(--primary);font-size:0.6rem;top:2px}
+    @media(max-width:768px){.pc{grid-template-columns:1fr}.pc .th{min-height:160px}.pc .th::after{background:linear-gradient(to top,var(--surface),transparent)}}
 
     /* Education */
     .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
@@ -260,15 +256,14 @@
     .edc h4{font-size:0.88rem;color:#fff}
     .edc .school{font-size:0.78rem;color:var(--muted)}
 
-    /* QR */
-    .qr-grid{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap}
-    .qc{
-      background:var(--surface);border-radius:var(--radius);padding:1.2rem;
-      border:1px solid var(--border);text-align:center;transition:all 0.3s;min-width:130px
+    /* Connect */
+    .connect-grid{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+    .cl{
+      width:60px;height:60px;border-radius:50%;background:var(--surface);
+      border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+      color:var(--muted);text-decoration:none;font-size:1.4rem;transition:all 0.3s
     }
-    .qc:hover{transform:translateY(-4px);border-color:rgba(168,85,255,0.12)}
-    .qc img{width:90px;height:90px;border-radius:8px;margin-bottom:0.5rem;background:#fff;padding:4px}
-    .qc .ql{font-size:0.72rem;color:var(--muted);font-weight:500}
+    .cl:hover{transform:translateY(-4px);color:#fff;border-color:var(--primary);box-shadow:0 0 20px rgba(168,85,255,0.15)}
 
     /* Testimonials */
     .ts{position:relative;overflow:hidden}
@@ -288,36 +283,10 @@
     .sdot{width:6px;height:6px;border-radius:50%;border:none;background:rgba(255,255,255,0.06);transition:all 0.3s;cursor:pointer}
     .sdot.active{background:var(--primary);width:20px;border-radius:3px}
 
-    /* Sneakinn Banner */
-    .sn-banner{
-      background:var(--surface);border-radius:var(--radius);
-      border:1px solid var(--border);padding:2rem;text-align:center;position:relative;overflow:hidden
-    }
-    .sn-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(168,85,255,0.04),transparent)}
-    .sn-banner .inner{position:relative;z-index:1}
-    .sn-banner h3{font-size:1.1rem;margin-bottom:0.3rem}
-    .sn-banner p{color:var(--muted);font-size:0.82rem;margin-bottom:0.8rem}
+
 
     /* Contact */
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .ci h3{font-size:1.3rem;margin-bottom:0.8rem}
-    .ci p{color:var(--muted);margin-bottom:1.2rem;line-height:1.6;font-size:0.88rem}
-    .citem{display:flex;gap:0.8rem;align-items:center;margin-bottom:0.6rem;padding:0.6rem;border-radius:8px;transition:background 0.2s}
-    .citem:hover{background:rgba(168,85,255,0.03)}
-    .citem .icon{width:38px;height:38px;border-radius:8px;background:rgba(168,85,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:0.85rem;flex-shrink:0}
-    .citem .info strong{display:block;font-size:0.78rem;color:#fff}
-    .citem .info span{font-size:0.75rem;color:var(--muted)}
-    .cf{background:var(--surface);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--border)}
-    .fg{margin-bottom:0.8rem}
-    .fg label{display:block;font-size:0.72rem;font-weight:600;margin-bottom:0.3rem;color:var(--muted)}
-    .fg input,.fg textarea{
-      width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.025);
-      border:1px solid var(--border);border-radius:8px;color:#fff;
-      font-family:inherit;font-size:0.85rem;transition:border-color 0.2s;outline:none
-    }
-    .fg input:focus,.fg textarea:focus{border-color:var(--primary)}
-    .fg textarea{resize:vertical;min-height:90px}
-    .fg .btn{width:100%;justify-content:center}
+
 
     /* Footer */
     footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--border)}
@@ -343,16 +312,16 @@
 
     /* Responsive */
     @media(max-width:768px){
-      .about-grid,.contact-grid,.exp-grid{grid-template-columns:1fr;gap:2rem}
-      .skills-grid,.proj-grid,.edu-grid{grid-template-columns:1fr}
-      .qr-grid{gap:0.8rem}
-      .qc{min-width:100px}
+      .about-grid,.exp-grid{grid-template-columns:1fr;gap:2rem}
+      .skills-grid,.edu-grid{grid-template-columns:1fr}
       section{padding:3rem 1rem}
       .hero h1{font-size:2rem}
       .about-img .badge{right:0;bottom:0}
       #customCursor,#snowTrail{display:none!important}
       body{cursor:auto}
-      .btn,.pc,.sdot,.hamburger{cursor:pointer}
+      .btn,.sdot,.hamburger{cursor:pointer}
+      #contactBtn{left:1rem;bottom:1rem;width:44px;height:44px;font-size:1rem}
+      #contactPopup{left:1rem;bottom:5rem;width:280px}
     }
     @media(max-width:480px){
       .hero-actions{flex-direction:column;align-items:stretch}
@@ -361,35 +330,47 @@
     }
 
     /* Section BG alternates */
-    #skills{background:linear-gradient(180deg,var(--bg) 0%,#0b0814 50%,var(--bg) 100%)}
+    #featured-work{background:linear-gradient(180deg,var(--bg) 0%,#0b0814 50%,var(--bg) 100%)}
     #experience{background:linear-gradient(180deg,var(--bg) 0%,#0e0710 50%,var(--bg) 100%)}
-    #testimonials{background:linear-gradient(180deg,var(--bg) 0%,#0c060e 50%,var(--bg) 100%)}
-    #contact{background:linear-gradient(180deg,var(--bg) 0%,#0a0712 50%,var(--bg) 100%)}
+    #skills{background:linear-gradient(180deg,var(--bg) 0%,#0c060e 50%,var(--bg) 100%)}
+    #testimonials{background:linear-gradient(180deg,var(--bg) 0%,#0a0712 50%,var(--bg) 100%)}
 
-    /* Modal */
-    .modal{
-      position:fixed;inset:0;z-index:9999;
-      background:rgba(0,0,0,0.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      display:none;align-items:center;justify-content:center;padding:1.5rem
+    /* Contact Popup */
+    #contactBtn{
+      position:fixed;bottom:2rem;left:2rem;z-index:9999;
+      width:52px;height:52px;border-radius:50%;
+      background:var(--g1);border:none;color:#fff;font-size:1.2rem;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;box-shadow:0 4px 20px rgba(168,85,255,0.3);
+      transition:all 0.3s;
+      display:none
     }
-    .modal.open{display:flex}
-    .modal-in{
-      max-width:600px;width:100%;max-height:80vh;overflow-y:auto;
-      background:var(--surface);border-radius:var(--radius);
-      border:1px solid var(--border);padding:1.8rem;position:relative;animation:ms 0.3s ease
+    #contactBtn:hover{transform:scale(1.08)}
+    #contactPopup{
+      position:fixed;bottom:5.5rem;left:2rem;z-index:9998;
+      width:300px;background:var(--surface);border-radius:var(--radius);
+      border:1px solid var(--border);padding:1.2rem;
+      display:none;box-shadow:0 10px 40px rgba(0,0,0,0.4);animation:cp 0.3s ease
     }
-    @keyframes ms{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-    .modal .close{
-      position:absolute;top:0.8rem;right:0.8rem;width:32px;height:32px;
+    #contactPopup.open{display:block}
+    @keyframes cp{from{opacity:0;transform:translateY(10px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+    #contactPopup h4{font-size:0.85rem;color:#fff;margin-bottom:0.6rem}
+    #contactPopup .fg{margin-bottom:0.5rem}
+    #contactPopup .fg label{display:block;font-size:0.65rem;font-weight:600;margin-bottom:0.2rem;color:var(--muted)}
+    #contactPopup .fg input,#contactPopup .fg textarea{
+      width:100%;padding:0.5rem 0.7rem;background:rgba(255,255,255,0.025);
+      border:1px solid var(--border);border-radius:6px;color:#fff;
+      font-family:inherit;font-size:0.78rem;transition:border-color 0.2s;outline:none
+    }
+    #contactPopup .fg input:focus,#contactPopup .fg textarea:focus{border-color:var(--primary)}
+    #contactPopup .fg textarea{resize:vertical;min-height:60px}
+    #contactPopup .btn{width:100%;justify-content:center;padding:0.5rem 1rem;font-size:0.78rem}
+    #contactPopup .close-popup{
+      position:absolute;top:0.5rem;right:0.5rem;width:24px;height:24px;
       border-radius:50%;background:rgba(255,255,255,0.03);border:none;
-      color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s
+      color:var(--muted);font-size:0.8rem;display:flex;align-items:center;justify-content:center;cursor:pointer
     }
-    .modal .close:hover{background:rgba(244,63,94,0.2)}
-    #modalTitle{font-size:1.2rem;margin-bottom:0.8rem}
-    #modalBody{color:var(--muted);line-height:1.6;font-size:0.85rem}
-    #modalBody ul{margin-top:0.5rem;padding-left:1.2rem}
-    #modalBody ul li{margin-bottom:0.3rem}
-    #modalBody ul li strong{color:#fff}
+    #contactPopup .close-popup:hover{background:rgba(244,63,94,0.2);color:#fff}
 
     /* Reduced motion preferences */
     @media(prefers-reduced-motion:reduce){
@@ -413,17 +394,17 @@
 <!-- Nav -->
 <nav id="navbar">
   <div class="logo">
-    <div class="logo-icon">AM</div>
-    <div class="logo-text">Ashutosh<span>.</span></div>
+    <div class="logo-icon">P</div>
+    <div class="logo-text">My <span>Portfolio</span></div>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Work</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#qr">Connect</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#featured-work">Featured Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">What I Bring</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#connect">Know More</a></li>
   </ul>
 </nav>
 
@@ -437,7 +418,7 @@
       <span class="hl2">Ashutosh Mishra</span>
       <span class="hl3">Sales &bull; Quality &bull; Growth</span>
     </h1>
-    <p>Recent BBA graduate &bull; QA Associate at <a href="https://sneakinn.in/" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600;">Sneakin</a></p>
+    <p>Quality Assurance Associate at <a href="https://sneakinn.in/" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600;">Sneakin</a></p>
     <div class="hero-actions">
       <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
       <a href="#" id="downloadCV" class="btn btn-ghost"><i class="fas fa-download"></i> Download CV</a>
@@ -445,15 +426,6 @@
   </div>
   <div class="hero-scroll"><div class="mouse"></div><span>Scroll</span></div>
 </section>
-
-<!-- Modal -->
-<div class="modal" id="projectModal">
-  <div class="modal-in">
-    <button class="close" onclick="closeModal()">&times;</button>
-    <h2 id="modalTitle"></h2>
-    <div id="modalBody"></div>
-  </div>
-</div>
 
 <!-- About -->
 <section id="about">
@@ -471,55 +443,43 @@
       </div>
       <div class="about-txt rvr">
         <h3>Who <span style="color:var(--primary)">I Am</span></h3>
-        <p>Recent BBA graduate with hands-on experience in sales generation and customer engagement. Proven ability in affiliate marketing and content creation, with strong skills in understanding customer needs and resolving objections.</p>
-        <p>Currently working as a <strong style="color:#fff">Quality Assurance Associate at Sneakin</strong>, ensuring premium product standards.</p>
-        <div class="about-details">
-          <div class="about-detail"><i class="fas fa-user"></i><div><strong>Name</strong><span>Ashutosh Mishra</span></div></div>
-          <div class="about-detail"><i class="fas fa-map-marker-alt"></i><div><strong>Location</strong><span>New Delhi, India</span></div></div>
-          <div class="about-detail"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>Mishra.ashutosh.2217@gmail.com</span></div></div>
-          <div class="about-detail"><i class="fas fa-phone"></i><div><strong>Phone</strong><span>+91-9335525344</span></div></div>
-          <div class="about-detail"><i class="fas fa-graduation-cap"></i><div><strong>Degree</strong><span>BBA, MGKVP 2025</span></div></div>
-          <div class="about-detail"><i class="fas fa-briefcase"></i><div><strong>Role</strong><span>QA Associate at Sneakin</span></div></div>
-        </div>
+        <p>A dynamic professional with a proven track record in <span class="hl">quality assurance</span>, <span class="hl">sales strategy</span>, and <span class="hl">digital marketing</span>. I combine analytical thinking with creative problem-solving to drive measurable business outcomes across diverse domains.</p>
+        <p>Currently sharpening my expertise as a <span class="hl-g">Quality Assurance Associate at Sneakin</span>, I ensure premium product standards through meticulous inspection and process optimization. My background spans sales conversion, affiliate marketing, content creation, and customer engagement — giving me a <span class="hl">360-degree view of business growth</span>.</p>
+        <p>
+          <span class="tag-skill">Quality Assurance</span>
+          <span class="tag-skill">Sales Strategy</span>
+          <span class="tag-skill">Digital Marketing</span>
+          <span class="tag-skill">Content Creation</span>
+          <span class="tag-skill">Customer Engagement</span>
+          <span class="tag-skill">Process Optimization</span>
+          <span class="tag-skill">Analytical Thinking</span>
+          <span class="tag-skill">Brand Management</span>
+          <span class="tag-skill">CRM Strategy</span>
+          <span class="tag-skill">Market Research</span>
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Skills -->
-<section id="skills">
+<!-- Featured Work -->
+<section id="featured-work">
   <div class="container">
-    <span class="sl rv">Skills</span>
-    <h2 class="st rv">What I <span class="gtext">bring</span></h2>
-    <p class="ss rv">A versatile skill set combining sales, communication, and digital proficiency.</p>
-    <div class="skills-grid">
-      <div class="sc rvs">
-        <div class="sc-bg"><img src="images/sales.jpg" alt="" loading="lazy"></div>
-        <div class="ic"><i class="fas fa-handshake"></i></div>
-        <h4>Sales & Engagement</h4>
-        <ul><li>Lead Generation</li><li>Cold Calling</li><li>CRM</li></ul>
-        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>90%</span></div><div class="sb"><div class="sb-fill" data-w="90"></div></div></div>
+    <span class="sl rv">Featured Work</span>
+    <h2 class="st rv">Projects I've <span class="gtext">delivered</span></h2>
+    <p class="ss rv">Real-world work showcasing my skills across research, marketing, and sales.</p>
+    <div class="proj-grid">
+      <div class="pc rvs">
+        <div class="th"><img src="images/project_research.jpg" alt="" loading="lazy"></div>
+        <div class="bd"><span class="pt">Research</span><h4>Consumer Behavior Analysis</h4><p>Comprehensive market research project analyzing customer satisfaction patterns in retail. Designed structured surveys, gathered feedback from 50+ participants, and delivered statistical insights that informed actionable business recommendations.</p><ul><li>Survey design & data collection</li><li>Statistical analysis & insights</li><li>Business recommendation report</li></ul></div>
       </div>
-      <div class="sc rvs">
-        <div class="sc-bg"><img src="images/support.jpg" alt="" loading="lazy"></div>
-        <div class="ic"><i class="fas fa-headset"></i></div>
-        <h4>Customer Support</h4>
-        <ul><li>Query Resolution</li><li>Pre-Sales</li><li>Conflict Resolution</li></ul>
-        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>85%</span></div><div class="sb"><div class="sb-fill" data-w="85"></div></div></div>
+      <div class="pc rvs">
+        <div class="th"><img src="images/project_marketing.jpg" alt="" loading="lazy"></div>
+        <div class="bd"><span class="pt">Marketing</span><h4>High-Conversion Campaign</h4><p>End-to-end social media campaign strategy that drove measurable engagement growth. Crafted targeted content narratives, managed community interactions, and optimized posting schedules for maximum reach and conversion.</p><ul><li>20% engagement increase</li><li>Targeted content strategy</li><li>Community management</li></ul></div>
       </div>
-      <div class="sc rvs">
-        <div class="sc-bg"><img src="images/digital.jpg" alt="" loading="lazy"></div>
-        <div class="ic"><i class="fas fa-laptop-code"></i></div>
-        <h4>Digital & Technical</h4>
-        <ul><li>Social Media</li><li>Content Creation</li><li>Prompt Eng.</li></ul>
-        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>80%</span></div><div class="sb"><div class="sb-fill" data-w="80"></div></div></div>
-      </div>
-      <div class="sc rvs">
-        <div class="sc-bg"><img src="images/skills.jpg" alt="" loading="lazy"></div>
-        <div class="ic"><i class="fas fa-users"></i></div>
-        <h4>Soft Skills</h4>
-        <ul><li>English Proficiency</li><li>Teamwork</li><li>Problem Solving</li></ul>
-        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>90%</span></div><div class="sb"><div class="sb-fill" data-w="90"></div></div></div>
+      <div class="pc rvs">
+        <div class="th"><img src="images/project_sales.jpg" alt="" loading="lazy"></div>
+        <div class="bd"><span class="pt">Workshop</span><h4>Sales Negotiation Workshop</h4><p>Intensive practical workshop covering modern sales methodologies and negotiation frameworks. Roleplayed real-world scenarios in cold-calling, objection handling, and client retention to build transferable sales competencies.</p><ul><li>Cold-calling techniques</li><li>Conflict resolution strategies</li><li>Customer retention frameworks</li></ul></div>
       </div>
     </div>
   </div>
@@ -537,12 +497,12 @@
         <div class="body">
           <div class="date">2026 — Present</div>
           <h3>Quality Assurance Associate</h3>
-          <div class="company"><a href="https://sneakinn.in/" target="_blank" style="color:var(--secondary);text-decoration:none">Sneakin</a> &mdash; New Delhi</div>
+          <div class="company" style="color:var(--muted);font-size:0.82rem"><i class="fas fa-at" style="color:var(--primary);font-size:0.7rem"></i> <a href="https://sneakinn.in/" target="_blank" style="color:var(--secondary);text-decoration:none;font-weight:600">Sneakinn</a> &mdash; New Delhi</div>
           <p>Perform quality inspections on premium products, ensuring adherence to brand standards.</p>
         </div>
       </div>
       <div class="ec rvs">
-        <div class="img"><img src="images/sneakinn_4.jpg" alt="" loading="lazy"><div class="tag"><i class="fas fa-star" style="color:var(--gold)"></i> Freelance</div></div>
+        <div class="img"><img src="images/project_freelance.jpg" alt="" loading="lazy"><div class="tag"><i class="fas fa-star" style="color:var(--gold)"></i> Freelance</div></div>
         <div class="body">
           <div class="date">2024 — 2025</div>
           <h3>Sales Associate & Affiliate Marketer</h3>
@@ -554,24 +514,36 @@
   </div>
 </section>
 
-<!-- Projects -->
-<section id="projects">
+<!-- Skills -->
+<section id="skills">
   <div class="container">
-    <span class="sl rv">Projects</span>
-    <h2 class="st rv">Featured <span class="gtext">work</span></h2>
-    <p class="ss rv">Click to explore full details.</p>
-    <div class="proj-grid">
-      <div class="pc rvs" onclick="openProject('Consumer Behavior Analysis','<p><strong>Type:</strong> BBA Market Research Project</p><p>Survey on customer satisfaction in retail. Analyzed feedback from <strong>50+ participants</strong> to identify key drivers of customer loyalty.</p><ul><li>Designed structured questionnaires</li><li>Statistical analysis of consumer data</li><li>Presented actionable recommendations</li></ul>')">
-        <div class="th"><img src="images/project_research.jpg" alt="" loading="lazy"><i class="fas fa-chart-bar"></i></div>
-        <div class="bd"><span class="pt">Research</span><h4>Consumer Behavior Analysis</h4><p>Survey on customer satisfaction; 50+ participants.</p></div>
+    <span class="sl rv">What I Bring</span>
+    <h2 class="st rv">Skills & <span class="gtext">expertise</span></h2>
+    <p class="ss rv">A versatile skill set combining quality assurance, sales strategy, and digital proficiency.</p>
+    <div class="skills-grid">
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/sales.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-handshake"></i></div>
+        <h4>Sales & Engagement</h4>
+        <div class="sd">Proven ability in <strong>lead generation</strong>, cold calling, and CRM management. Skilled at identifying customer pain points and delivering tailored solutions that drive conversions and build long-term relationships.</div>
       </div>
-      <div class="pc rvs" onclick="openProject('High-Conversion Campaign','<p><strong>Type:</strong> Freelance Marketing Campaign</p><p>Designed and executed a social media campaign resulting in measurable growth.</p><ul><li><strong>Result:</strong> Engagement +20%</li><li>Targeted content strategy</li><li>Responsive community management</li></ul>')">
-        <div class="th"><img src="images/project_marketing.jpg" alt="" loading="lazy"><i class="fas fa-rocket"></i></div>
-        <div class="bd"><span class="pt">Marketing</span><h4>High-Conversion Campaign</h4><p>20% engagement increase through targeted content.</p></div>
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/support.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-headset"></i></div>
+        <h4>Customer Support</h4>
+        <div class="sd">Expert in <strong>query resolution</strong>, pre-sales consulting, and conflict de-escalation. Maintain high satisfaction rates through empathetic communication and swift problem-solving across multiple channels.</div>
       </div>
-      <div class="pc rvs" onclick="openProject('Sales Negotiation Workshop','<p><strong>Type:</strong> BBA Coursework</p><p>Intensive workshop on practical sales and negotiation skills.</p><ul><li>Cold-calling techniques</li><li>Conflict resolution strategies</li><li>Customer retention frameworks</li></ul>')">
-        <div class="th"><img src="images/project_sales.jpg" alt="" loading="lazy"><i class="fas fa-phone-alt"></i></div>
-        <div class="bd"><span class="pt">Workshop</span><h4>Sales Negotiation Workshop</h4><p>Roleplay on cold-calling & retention strategies.</p></div>
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/digital.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-laptop-code"></i></div>
+        <h4>Digital & Technical</h4>
+        <div class="sd">Hands-on experience with <strong>social media management</strong>, content creation, and prompt engineering. Adept at leveraging digital tools for analytics, automation, and brand storytelling.</div>
+      </div>
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/skills.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-users"></i></div>
+        <h4>Core Competencies</h4>
+        <div class="sd"><strong>Analytical thinking</strong>, team collaboration, and adaptability. Combine strategic planning with execution focus to consistently meet goals and exceed expectations in fast-paced environments.</div>
       </div>
     </div>
   </div>
@@ -584,24 +556,9 @@
     <h2 class="st rv">Academic <span class="gtext">background</span></h2>
     <p class="ss rv">My educational journey through graduation.</p>
     <div class="edu-grid">
-      <div class="edc rvs"><div class="year">2025</div><h4>BBA — Business Administration</h4><div class="school">MGKVP</div></div>
-      <div class="edc rvs"><div class="year">2022</div><h4>Senior Secondary (12th)</h4><div class="school">CBSE Board</div></div>
-      <div class="edc rvs"><div class="year">2020</div><h4>High School (10th)</h4><div class="school">CBSE Board</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- QR -->
-<section id="qr">
-  <div class="container">
-    <span class="sl rv">Connect</span>
-    <h2 class="st rv">Scan to <span class="gtext">connect</span></h2>
-    <p class="ss rv">Scan any QR code to instantly connect on your preferred platform.</p>
-    <div class="qr-grid">
-      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.linkedin.com/in/ashutosh-mishra-15b762394" alt="LinkedIn QR" loading="lazy"><div class="ql"><i class="fab fa-linkedin-in" style="color:#0a66c2"></i> LinkedIn</div></div>
-      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.instagram.com/_ashutoshhhhh._" alt="Instagram QR" loading="lazy"><div class="ql"><i class="fab fa-instagram" style="color:#e4405f"></i> Instagram</div></div>
-      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mailto:Mishra.ashutosh.2217@gmail.com" alt="Email QR" loading="lazy"><div class="ql"><i class="fas fa-envelope" style="color:var(--primary)"></i> Email</div></div>
-      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://sneakinn.in/" alt="Sneakinn QR" loading="lazy"><div class="ql"><i class="fas fa-store" style="color:var(--accent)"></i> Sneakinn</div></div>
+      <div class="edc rvs"><div class="year">2025</div><h4>BBA — Business Administration</h4><div class="school">MGKVP &bull; Market Research Project on Consumer Behavior</div></div>
+      <div class="edc rvs"><div class="year">2022</div><h4>Senior Secondary (12th)</h4><div class="school">CBSE Board &bull; Sales Negotiation Workshop Facilitator</div></div>
+      <div class="edc rvs"><div class="year">2020</div><h4>High School (10th)</h4><div class="school">CBSE Board &bull; Affiliate Marketing Campaign Lead</div></div>
     </div>
   </div>
 </section>
@@ -623,44 +580,34 @@
   </div>
 </section>
 
-<!-- Sneakinn CTA -->
-<section>
+<!-- Connect -->
+<section id="connect">
   <div class="container">
-    <div class="sn-banner rvs">
-      <div class="inner">
-        <i class="fas fa-store" style="font-size:1.5rem;color:var(--primary);margin-bottom:0.6rem;display:block"></i>
-        <h3>Check Out <span class="gtext">Sneakinn</span></h3>
-        <p>Premium sneaker care — where I work as a QA Associate.</p>
-        <a href="https://sneakinn.in/" target="_blank" class="btn btn-ghost"><i class="fas fa-external-link-alt"></i> Visit Sneakinn</a>
-      </div>
+    <span class="sl rv">Know More</span>
+    <h2 class="st rv">Let's <span class="gtext">connect</span></h2>
+    <p class="ss rv">Reach out to me directly on any of these platforms.</p>
+    <div class="connect-grid">
+      <a href="mailto:Mishra.ashutosh.2217@gmail.com" class="cl rvs" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/ashutosh-mishra-15b762394" target="_blank" class="cl rvs" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.instagram.com/_ashutoshhhhh._" target="_blank" class="cl rvs" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/919335525344" target="_blank" class="cl rvs" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     </div>
   </div>
 </section>
 
-<!-- Contact -->
-<section id="contact">
-  <div class="container">
-    <span class="sl rv">Contact</span>
-    <h2 class="st rv">Let's <span class="gtext">connect</span></h2>
-    <p class="ss rv">Have a question or want to collaborate? Reach out!</p>
-    <div class="contact-grid">
-      <div class="ci rvl">
-        <h3>Get in <span style="color:var(--primary)">touch</span></h3>
-        <p>Always open to new opportunities, collaborations, and conversations.</p>
-        <div class="citem"><div class="icon"><i class="fas fa-envelope"></i></div><div class="info"><strong>Email</strong><span>Mishra.ashutosh.2217@gmail.com</span></div></div>
-        <div class="citem"><div class="icon"><i class="fas fa-phone"></i></div><div class="info"><strong>Phone</strong><span>+91-9335525344</span></div></div>
-        <div class="citem"><div class="icon"><i class="fas fa-map-marker-alt"></i></div><div class="info"><strong>Location</strong><span>New Delhi, India</span></div></div>
-        <div class="citem" onclick="downloadCV()"><div class="icon"><i class="fas fa-download"></i></div><div class="info"><strong>CV / Resume</strong><span style="color:var(--primary);cursor:pointer">Download PDF &rarr;</span></div></div>
-      </div>
-      <form class="cf rvr" id="contactForm">
-        <div class="fg"><label>Your Name</label><input type="text" id="name" placeholder="John Doe" required></div>
-        <div class="fg"><label>Your Email</label><input type="email" id="email" placeholder="john@example.com" required></div>
-        <div class="fg"><label>Message</label><textarea id="message" placeholder="Tell me about your project..." required></textarea></div>
-        <div class="fg"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button></div>
-      </form>
-    </div>
-  </div>
-</section>
+<!-- Contact (floating button + popup) -->
+<button id="contactBtn" onclick="toggleContact()"><i class="fas fa-comment-dots"></i></button>
+<div id="contactPopup">
+  <button class="close-popup" onclick="toggleContact()">&times;</button>
+  <h4><i class="fas fa-paper-plane" style="color:var(--primary);font-size:0.75rem"></i> Get in Touch</h4>
+  <form id="contactFormPopup">
+    <div class="fg"><label>Name</label><input type="text" id="namePopup" placeholder="Your name" required></div>
+    <div class="fg"><label>Email</label><input type="email" id="emailPopup" placeholder="your@email.com" required></div>
+    <div class="fg"><label>Message</label><textarea id="messagePopup" placeholder="Your message..." required></textarea></div>
+    <div class="fg"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button></div>
+  </form>
+</div>
+
 
 <footer>
   <div class="fb">Ashutosh <span class="gtext">Mishra</span></div>
@@ -668,7 +615,6 @@
     <a href="mailto:Mishra.ashutosh.2217@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
     <a href="https://www.linkedin.com/in/ashutosh-mishra-15b762394" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
     <a href="https://www.instagram.com/_ashutoshhhhh._" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://sneakinn.in/" target="_blank" aria-label="Sneakinn"><i class="fas fa-store"></i></a>
   </div>
   <p>&copy; 2026 Ashutosh Mishra</p>
 </footer>
@@ -738,29 +684,23 @@ window.addEventListener('scroll',()=>{document.getElementById('navbar').classLis
 const ro=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:0.1});
 document.querySelectorAll('.rv,.rvl,.rvr,.rvs').forEach(e=>ro.observe(e));
 
-// Skill bars
-const so=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.style.width=e.target.dataset.w+'%'})},{threshold:0.4});
-document.querySelectorAll('.sb-fill').forEach(e=>so.observe(e));
-
 // Testimonials
 const tt=document.getElementById('tt');const sd=document.getElementById('sdots');const tc=tt.querySelectorAll('.tcard');let cs=0;
 tc.forEach((_,i)=>{const d=document.createElement('button');d.className='sdot'+(i===0?' active':'');d.onclick=()=>gs(i);sd.appendChild(d)});
 function gs(i){cs=i;tt.style.transform='translateX(-'+i*100+'%)';sd.querySelectorAll('.sdot').forEach((d,j)=>d.classList.toggle('active',j===i))}
 setInterval(()=>gs((cs+1)%tc.length),4500);
 
-// Modal
-function openProject(t,b){document.getElementById('modalTitle').innerHTML='<i class="fas fa-folder-open" style="color:var(--primary)"></i> '+t;document.getElementById('modalBody').innerHTML=b;document.getElementById('projectModal').classList.add('open');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('projectModal').classList.remove('open');document.body.style.overflow=''}
-document.getElementById('projectModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-
-// Contact form
-document.getElementById('contactForm').addEventListener('submit',e=>{
+// Contact Popup
+function toggleContact(){document.getElementById('contactPopup').classList.toggle('open')}
+document.getElementById('contactFormPopup').addEventListener('submit',e=>{
   e.preventDefault();
-  const n=document.getElementById('name').value.trim();
-  const em=document.getElementById('email').value.trim();
-  const m=document.getElementById('message').value.trim();
-  if(n&&em&&m)window.location.href='mailto:Mishra.ashutosh.2217@gmail.com?subject=Portfolio Inquiry from '+n+'&body='+encodeURIComponent(m+'\n\n— '+n+'\n'+em);
+  const n=document.getElementById('namePopup').value.trim();
+  const em=document.getElementById('emailPopup').value.trim();
+  const m=document.getElementById('messagePopup').value.trim();
+  if(n&&em&&m){
+    window.location.href='mailto:Mishra.ashutosh.2217@gmail.com?subject=Portfolio Inquiry from '+n+'&body='+encodeURIComponent(m+'\n\n— '+n+'\n'+em);
+    toggleContact();
+  }
 });
 
 // Download CV
@@ -769,6 +709,8 @@ document.getElementById('downloadCV').addEventListener('click',e=>{e.preventDefa
 
 // Touch device detection
 if('ontouchstart' in window){document.body.style.cursor='auto'}
+// Show contact button on all devices
+document.getElementById('contactBtn').style.display='flex'
 </script>
 </body>
 </html>
