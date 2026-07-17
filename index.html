@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ashutosh Mishra — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',sans-serif;background:#09090b;color:#e4e4e7;
+      overflow-x:hidden;line-height:1.6;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale
+    }
+    :root{
+      --bg:#09090b;--surface:#18181b;--border:rgba(255,255,255,0.06);
+      --primary:#a855f7;--secondary:#f43f5e;--accent:#06b6d4;--gold:#eab308;
+      --g1:linear-gradient(135deg,#a855f7,#f43f5e);
+      --g2:linear-gradient(135deg,#06b6d4,#a855f7);
+      --g3:linear-gradient(135deg,#eab308,#f43f5e);
+      --text:#e4e4e7;--muted:#71717a;--radius:12px
+    }
+    ::selection{background:var(--primary);color:#fff}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:2px}
+    .gtext{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+    /* Custom Cursor - Simple Circle */
+    #customCursor{position:fixed;pointer-events:none;z-index:99999;width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(168,85,255,0.5);background:rgba(168,85,255,0.08);transform:translate(-50%,-50%);will-change:transform;transition:width 0.2s,height 0.2s,background 0.2s;display:none}
+    #customCursor.hover{width:32px;height:32px;background:rgba(168,85,255,0.15);border-color:rgba(168,85,255,0.7)}
+
+    /* Snow Trail */
+    #snowTrail{position:fixed;pointer-events:none;z-index:99998;inset:0;overflow:hidden}
+    .flake{
+      position:absolute;border-radius:50%;pointer-events:none;
+      animation:sf 0.6s linear forwards;will-change:transform
+    }
+    @keyframes sf{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--sx),var(--sy)) scale(0.3);opacity:0}}
+
+    /* Background Particles */
+    #particles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .fly{
+      position:absolute;pointer-events:none;animation:flyAround linear infinite;will-change:transform;opacity:0
+    }
+    @keyframes flyAround{
+      0%{transform:translate(0,0) scale(1)}10%{opacity:0.5}
+      90%{opacity:0.3}100%{transform:translate(var(--tx),var(--ty)) scale(0.3);opacity:0}
+    }
+
+    /* Nav */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      padding:0 1.5rem;height:64px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(9,9,11,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);transition:all 0.3s
+    }
+    nav.scrolled{background:rgba(9,9,11,0.96)}
+    .logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none}
+    .logo-icon{
+      width:32px;height:32px;border-radius:8px;
+      background:var(--g1);display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:0.85rem;color:#fff;flex-shrink:0
+    }
+    .logo-text{font-size:1rem;font-weight:700;color:#fff;letter-spacing:-0.3px}
+    .logo-text span{color:var(--primary)}
+    .nav-links{display:flex;gap:1.2rem;list-style:none;align-items:center}
+    .nav-links a{
+      color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:500;
+      transition:color 0.2s;padding:0.3rem 0
+    }
+    .nav-links a:hover{color:#fff}
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{width:20px;height:2px;background:#fff;border-radius:2px;transition:0.3s}
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+    .hamburger.active span:nth-child(2){opacity:0}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+    @media(max-width:768px){
+      .nav-links{
+        display:none;position:fixed;top:64px;left:0;right:0;
+        background:rgba(9,9,11,0.98);flex-direction:column;padding:1.5rem;gap:1rem;
+        border-bottom:1px solid var(--border)
+      }
+      .nav-links.open{display:flex}
+      .hamburger{display:flex}
+    }
+
+    /* Hero */
+    .hero{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;
+      position:relative;overflow:hidden;padding:6rem 1.5rem;z-index:1
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 30% 40%,rgba(168,85,255,0.08) 0%,transparent 60%),
+                 radial-gradient(ellipse at 70% 60%,rgba(244,63,94,0.05) 0%,transparent 50%)
+    }
+    .hero-grid{
+      position:absolute;inset:0;
+      background-image:linear-gradient(rgba(168,85,255,0.03) 1px,transparent 1px),
+                       linear-gradient(90deg,rgba(168,85,255,0.03) 1px,transparent 1px);
+      background-size:48px 48px;
+      mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);
+      -webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%)
+    }
+    .hero-content{position:relative;z-index:2;text-align:center;max-width:720px}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.4rem 1.2rem;border-radius:50px;
+      background:rgba(168,85,255,0.06);border:1px solid rgba(168,85,255,0.12);
+      font-size:0.75rem;font-weight:500;color:var(--primary);margin-bottom:1.5rem
+    }
+    .hero-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--emerald, #10b981);animation:pulse 1.5s infinite;display:inline-block}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
+    .hero h1{font-size:clamp(2.2rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
+    .hero h1 .hl1{display:block;color:#fff}
+    .hero h1 .hl2{display:block;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero h1 .hl3{display:block;color:var(--muted);font-weight:400;font-size:0.35em;letter-spacing:3px;text-transform:uppercase;margin-top:0.4rem}
+    .hero p{font-size:0.95rem;color:var(--muted);max-width:520px;margin:0 auto 2rem;line-height:1.7}
+    .hero-actions{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:0.5rem;
+      padding:0.75rem 1.6rem;border-radius:50px;
+      font-weight:600;font-size:0.85rem;text-decoration:none;border:none;
+      transition:all 0.25s;font-family:inherit;cursor:pointer
+    }
+    .btn-primary{background:var(--g1);color:#fff;box-shadow:0 4px 20px rgba(168,85,255,0.2)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(168,85,255,0.3)}
+    .btn-ghost{background:transparent;color:#fff;border:1px solid var(--border)}
+    .btn-ghost:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12)}
+    .hero-scroll{
+      position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+      color:var(--muted);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+      animation:fiu 2s ease infinite;display:flex;flex-direction:column;align-items:center;gap:0.4rem
+    }
+    .hero-scroll .mouse{width:18px;height:28px;border:2px solid rgba(255,255,255,0.08);border-radius:10px;position:relative}
+    .hero-scroll .mouse::after{content:'';position:absolute;top:5px;left:50%;transform:translateX(-50%);width:2px;height:7px;background:var(--primary);border-radius:2px;animation:sw 1.5s infinite}
+    @keyframes sw{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(10px)}}
+    @keyframes fiu{0%,100%{opacity:0.5}50%{opacity:1}}
+
+    /* Sections */
+    section{padding:5rem 1.5rem;position:relative;z-index:1}
+    .container{max-width:1040px;margin:0 auto}
+    .sl{font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:0.5rem;display:block}
+    .st{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;margin-bottom:0.5rem;line-height:1.2}
+    .ss{color:var(--muted);max-width:560px;font-size:0.9rem;margin-bottom:2.5rem;line-height:1.6}
+
+    /* About */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    .about-img{position:relative}
+    .about-img .wrap{
+      width:100%;aspect-ratio:1;border-radius:var(--radius);overflow:hidden;
+      border:1px solid var(--border);
+      background:var(--surface)
+    }
+    .about-img .wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+    .about-img .wrap:hover img{transform:scale(1.03)}
+    .about-img .wrap .ring{
+      position:absolute;inset:-2px;border-radius:var(--radius);
+      border:1px solid transparent;
+      background:var(--g1) border-box;
+      -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude
+    }
+    .about-img .badge{
+      position:absolute;bottom:-0.5rem;right:-0.5rem;
+      background:rgba(24,24,27,0.95);backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid var(--border);padding:1rem;border-radius:var(--radius);text-align:center;min-width:100px
+    }
+    .about-img .badge .big{font-size:1.5rem;font-weight:800;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .about-img .badge .sm{font-size:0.68rem;color:var(--muted)}
+    .about-txt h3{font-size:1.4rem;margin-bottom:0.8rem}
+    .about-txt p{color:var(--muted);margin-bottom:0.8rem;line-height:1.7;font-size:0.88rem}
+    .about-details{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:1rem}
+    .about-detail{
+      display:flex;gap:0.6rem;align-items:flex-start;
+      padding:0.6rem;border-radius:8px;transition:background 0.2s
+    }
+    .about-detail:hover{background:rgba(168,85,255,0.04)}
+    .about-detail i{color:var(--primary);font-size:0.85rem;margin-top:2px}
+    .about-detail strong{display:block;font-size:0.78rem;color:#fff}
+    .about-detail span{font-size:0.72rem;color:var(--muted)}
+    
+    /* Skills */
+    .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .sc{
+      background:var(--surface);border-radius:var(--radius);padding:1.5rem;
+      border:1px solid var(--border);transition:all 0.3s;position:relative;overflow:hidden
+    }
+    .sc .sc-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+    .sc .sc-bg img{width:100%;height:100%;object-fit:cover;opacity:0.04;transition:opacity 0.4s}
+    .sc:hover .sc-bg img{opacity:0.08}
+    .sc .sc-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--surface) 30%,transparent 60%,var(--surface) 100%)}
+    .sc:hover{transform:translateY(-3px);border-color:rgba(168,85,255,0.15)}
+    .sc .ic,.sc h4,.sc ul,.sc .sb-wrap{position:relative;z-index:1}
+    .sc .ic{width:36px;height:36px;border-radius:8px;background:rgba(168,85,255,0.06);display:flex;align-items:center;justify-content:center;margin-bottom:0.8rem;font-size:0.9rem;color:var(--primary)}
+    .sc:nth-child(2) .ic{color:var(--secondary);background:rgba(244,63,94,0.06)}
+    .sc:nth-child(3) .ic{color:var(--accent);background:rgba(6,182,212,0.06)}
+    .sc:nth-child(4) .ic{color:var(--gold);background:rgba(234,179,8,0.06)}
+    .sc h4{font-size:0.9rem;margin-bottom:0.5rem;color:#fff}
+    .sc ul{list-style:none;display:flex;flex-wrap:wrap;gap:0.3rem}
+    .sc ul li{background:rgba(255,255,255,0.03);padding:0.2rem 0.6rem;border-radius:50px;font-size:0.7rem;color:var(--muted)}
+    .sb-wrap{margin-top:0.8rem}
+    .sb-lbl{display:flex;justify-content:space-between;font-size:0.7rem;margin-bottom:0.25rem}
+    .sb-lbl span:last-child{color:var(--primary);font-weight:600}
+    .sb{height:3px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden}
+    .sb-fill{height:100%;border-radius:3px;background:var(--g1);width:0;transition:width 1s cubic-bezier(0.22,1,0.36,1)}
+
+    /* Experience */
+    .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .ec{
+      background:var(--surface);border-radius:var(--radius);overflow:hidden;
+      border:1px solid var(--border);transition:all 0.3s;position:relative
+    }
+    .ec:hover{transform:translateY(-4px);border-color:rgba(168,85,255,0.12)}
+    .ec .img{height:180px;overflow:hidden;position:relative}
+    .ec .img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+    .ec:hover .img img{transform:scale(1.04)}
+    .ec .img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--surface),transparent 50%)}
+    .ec .img .tag{position:absolute;bottom:0.8rem;left:0.8rem;z-index:1;padding:0.25rem 0.7rem;border-radius:50px;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:0.68rem;color:#fff;font-weight:500}
+    .ec .body{padding:1.3rem}
+    .ec .body .date{font-size:0.68rem;color:var(--primary);font-weight:600;margin-bottom:0.25rem}
+    .ec .body h3{font-size:0.95rem;color:#fff;margin-bottom:0.2rem}
+    .ec .body .company{font-size:0.8rem;color:var(--secondary);margin-bottom:0.4rem}
+    .ec .body p{font-size:0.8rem;color:var(--muted);line-height:1.6}
+    .ec .body ul{margin-top:0.4rem;padding-left:1.2rem}
+    .ec .body ul li{font-size:0.78rem;color:var(--muted);margin-bottom:0.25rem}
+
+    /* Projects */
+    .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .pc{
+      background:var(--surface);border-radius:var(--radius);overflow:hidden;
+      border:1px solid var(--border);transition:all 0.3s;cursor:pointer
+    }
+    .pc:hover{transform:translateY(-4px);border-color:rgba(168,85,255,0.12)}
+    .pc .th{height:160px;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(168,85,255,0.08);position:relative;overflow:hidden}
+    .pc .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+    .pc:hover .th img{transform:scale(1.06)}
+    .pc .th::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--surface) 20%,transparent 60%);z-index:1}
+    .pc .th i{position:relative;z-index:2;opacity:0.3;transition:opacity 0.3s}
+    .pc:hover .th i{opacity:0.6}
+    .pc .bd{padding:1.2rem}
+    .pc .bd .pt{font-size:0.65rem;font-weight:600;text-transform:uppercase;color:var(--accent);margin-bottom:0.25rem;letter-spacing:1px}
+    .pc .bd h4{font-size:0.9rem;margin-bottom:0.25rem;color:#fff}
+    .pc .bd p{font-size:0.78rem;color:var(--muted);line-height:1.5}
+
+    /* Education */
+    .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .edc{
+      background:var(--surface);border-radius:var(--radius);padding:1.5rem;
+      border:1px solid var(--border);transition:all 0.3s
+    }
+    .edc:hover{transform:translateY(-3px);border-color:rgba(6,182,212,0.12)}
+    .edc .year{font-size:0.68rem;color:var(--primary);font-weight:600;margin-bottom:0.25rem}
+    .edc h4{font-size:0.88rem;color:#fff}
+    .edc .school{font-size:0.78rem;color:var(--muted)}
+
+    /* QR */
+    .qr-grid{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap}
+    .qc{
+      background:var(--surface);border-radius:var(--radius);padding:1.2rem;
+      border:1px solid var(--border);text-align:center;transition:all 0.3s;min-width:130px
+    }
+    .qc:hover{transform:translateY(-4px);border-color:rgba(168,85,255,0.12)}
+    .qc img{width:90px;height:90px;border-radius:8px;margin-bottom:0.5rem;background:#fff;padding:4px}
+    .qc .ql{font-size:0.72rem;color:var(--muted);font-weight:500}
+
+    /* Testimonials */
+    .ts{position:relative;overflow:hidden}
+    .tt{display:flex;transition:transform 0.5s cubic-bezier(0.22,1,0.36,1)}
+    .tcard{min-width:100%;padding:0.5rem}
+    .tcard .in{
+      background:var(--surface);border-radius:var(--radius);padding:2rem 1.5rem;
+      border:1px solid var(--border);text-align:center;max-width:600px;margin:0 auto
+    }
+    .tcard .qi{font-size:1.5rem;margin-bottom:0.8rem}
+    .tcard p{font-size:0.85rem;color:var(--muted);line-height:1.7;font-style:italic;margin-bottom:1.2rem}
+    .tcard .auth{display:flex;align-items:center;justify-content:center;gap:0.8rem}
+    .tcard .auth .av{width:40px;height:40px;border-radius:50%;background:var(--g1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff;flex-shrink:0}
+    .tcard .auth .info strong{display:block;font-size:0.82rem;color:#fff}
+    .tcard .auth .info span{font-size:0.72rem;color:var(--muted)}
+    .sdots{display:flex;justify-content:center;gap:0.4rem;margin-top:1rem}
+    .sdot{width:6px;height:6px;border-radius:50%;border:none;background:rgba(255,255,255,0.06);transition:all 0.3s;cursor:pointer}
+    .sdot.active{background:var(--primary);width:20px;border-radius:3px}
+
+    /* Sneakinn Banner */
+    .sn-banner{
+      background:var(--surface);border-radius:var(--radius);
+      border:1px solid var(--border);padding:2rem;text-align:center;position:relative;overflow:hidden
+    }
+    .sn-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(168,85,255,0.04),transparent)}
+    .sn-banner .inner{position:relative;z-index:1}
+    .sn-banner h3{font-size:1.1rem;margin-bottom:0.3rem}
+    .sn-banner p{color:var(--muted);font-size:0.82rem;margin-bottom:0.8rem}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .ci h3{font-size:1.3rem;margin-bottom:0.8rem}
+    .ci p{color:var(--muted);margin-bottom:1.2rem;line-height:1.6;font-size:0.88rem}
+    .citem{display:flex;gap:0.8rem;align-items:center;margin-bottom:0.6rem;padding:0.6rem;border-radius:8px;transition:background 0.2s}
+    .citem:hover{background:rgba(168,85,255,0.03)}
+    .citem .icon{width:38px;height:38px;border-radius:8px;background:rgba(168,85,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:0.85rem;flex-shrink:0}
+    .citem .info strong{display:block;font-size:0.78rem;color:#fff}
+    .citem .info span{font-size:0.75rem;color:var(--muted)}
+    .cf{background:var(--surface);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--border)}
+    .fg{margin-bottom:0.8rem}
+    .fg label{display:block;font-size:0.72rem;font-weight:600;margin-bottom:0.3rem;color:var(--muted)}
+    .fg input,.fg textarea{
+      width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.025);
+      border:1px solid var(--border);border-radius:8px;color:#fff;
+      font-family:inherit;font-size:0.85rem;transition:border-color 0.2s;outline:none
+    }
+    .fg input:focus,.fg textarea:focus{border-color:var(--primary)}
+    .fg textarea{resize:vertical;min-height:90px}
+    .fg .btn{width:100%;justify-content:center}
+
+    /* Footer */
+    footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--border)}
+    footer .fb{font-size:1rem;font-weight:800;margin-bottom:0.8rem}
+    footer .socials{display:flex;justify-content:center;gap:0.6rem;margin-bottom:1rem}
+    footer .socials a{
+      width:36px;height:36px;border-radius:50%;background:var(--surface);
+      border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+      color:var(--muted);text-decoration:none;transition:all 0.2s
+    }
+    footer .socials a:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-2px)}
+    footer p{font-size:0.72rem;color:var(--muted)}
+
+    /* Reveal */
+    .rv{opacity:0;transform:translateY(20px);transition:all 0.6s cubic-bezier(0.22,1,0.36,1)}
+    .rv.v{opacity:1;transform:translateY(0)}
+    .rvl{opacity:0;transform:translateX(-30px);transition:all 0.6s cubic-bezier(0.22,1,0.36,1)}
+    .rvl.v{opacity:1;transform:translateX(0)}
+    .rvr{opacity:0;transform:translateX(30px);transition:all 0.6s cubic-bezier(0.22,1,0.36,1)}
+    .rvr.v{opacity:1;transform:translateX(0)}
+    .rvs{opacity:0;transform:scale(0.95);transition:all 0.6s cubic-bezier(0.22,1,0.36,1)}
+    .rvs.v{opacity:1;transform:scale(1)}
+
+    /* Responsive */
+    @media(max-width:768px){
+      .about-grid,.contact-grid,.exp-grid{grid-template-columns:1fr;gap:2rem}
+      .skills-grid,.proj-grid,.edu-grid{grid-template-columns:1fr}
+      .qr-grid{gap:0.8rem}
+      .qc{min-width:100px}
+      section{padding:3rem 1rem}
+      .hero h1{font-size:2rem}
+      .about-img .badge{right:0;bottom:0}
+      #customCursor,#snowTrail{display:none!important}
+      body{cursor:auto}
+      .btn,.pc,.sdot,.hamburger{cursor:pointer}
+    }
+    @media(max-width:480px){
+      .hero-actions{flex-direction:column;align-items:stretch}
+      .btn{justify-content:center}
+      .hero h1{font-size:1.8rem}
+    }
+
+    /* Section BG alternates */
+    #skills{background:linear-gradient(180deg,var(--bg) 0%,#0b0814 50%,var(--bg) 100%)}
+    #experience{background:linear-gradient(180deg,var(--bg) 0%,#0e0710 50%,var(--bg) 100%)}
+    #testimonials{background:linear-gradient(180deg,var(--bg) 0%,#0c060e 50%,var(--bg) 100%)}
+    #contact{background:linear-gradient(180deg,var(--bg) 0%,#0a0712 50%,var(--bg) 100%)}
+
+    /* Modal */
+    .modal{
+      position:fixed;inset:0;z-index:9999;
+      background:rgba(0,0,0,0.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      display:none;align-items:center;justify-content:center;padding:1.5rem
+    }
+    .modal.open{display:flex}
+    .modal-in{
+      max-width:600px;width:100%;max-height:80vh;overflow-y:auto;
+      background:var(--surface);border-radius:var(--radius);
+      border:1px solid var(--border);padding:1.8rem;position:relative;animation:ms 0.3s ease
+    }
+    @keyframes ms{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .modal .close{
+      position:absolute;top:0.8rem;right:0.8rem;width:32px;height:32px;
+      border-radius:50%;background:rgba(255,255,255,0.03);border:none;
+      color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s
+    }
+    .modal .close:hover{background:rgba(244,63,94,0.2)}
+    #modalTitle{font-size:1.2rem;margin-bottom:0.8rem}
+    #modalBody{color:var(--muted);line-height:1.6;font-size:0.85rem}
+    #modalBody ul{margin-top:0.5rem;padding-left:1.2rem}
+    #modalBody ul li{margin-bottom:0.3rem}
+    #modalBody ul li strong{color:#fff}
+
+    /* Reduced motion preferences */
+    @media(prefers-reduced-motion:reduce){
+      *{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+    }
+  </style>
+</head>
+<body>
+
+<div id="customCursor"></div>
+<div id="snowTrail"></div>
+<div id="particles"></div>
+
+<!-- Loader -->
+<div id="loader" style="position:fixed;inset:0;z-index:99999;background:#09090b;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;transition:opacity 0.5s,visibility 0.5s">
+  <div style="width:36px;height:36px;border-radius:50%;border:2px solid rgba(168,85,255,0.06);border-top-color:var(--primary);animation:sp 0.7s linear infinite"></div>
+  <div style="font-size:0.7rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase">Loading</div>
+  <style>@keyframes sp{to{transform:rotate(360deg)}}</style>
+</div>
+
+<!-- Nav -->
+<nav id="navbar">
+  <div class="logo">
+    <div class="logo-icon">AM</div>
+    <div class="logo-text">Ashutosh<span>.</span></div>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#qr">Connect</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <span class="hero-badge"><span class="dot"></span> Available for opportunities</span>
+    <h1>
+      <span class="hl1">Hello, I'm</span>
+      <span class="hl2">Ashutosh Mishra</span>
+      <span class="hl3">Sales &bull; Quality &bull; Growth</span>
+    </h1>
+    <p>Recent BBA graduate &bull; QA Associate at <a href="https://sneakinn.in/" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600;">Sneakin</a></p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+      <a href="#" id="downloadCV" class="btn btn-ghost"><i class="fas fa-download"></i> Download CV</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="mouse"></div><span>Scroll</span></div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="projectModal">
+  <div class="modal-in">
+    <button class="close" onclick="closeModal()">&times;</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <span class="sl rv">About Me</span>
+    <h2 class="st rv">Turning <span class="gtext">challenges</span> into opportunities</h2>
+    <p class="ss rv">A dedicated professional passionate about sales, customer engagement, and quality assurance.</p>
+    <div class="about-grid">
+      <div class="about-img rvl">
+        <div class="wrap">
+          <img src="images/profile.jpg" alt="Ashutosh Mishra" loading="lazy">
+          <div class="ring"></div>
+        </div>
+        <div class="badge"><span class="big">2+</span><span class="sm">Years Exp.</span></div>
+      </div>
+      <div class="about-txt rvr">
+        <h3>Who <span style="color:var(--primary)">I Am</span></h3>
+        <p>Recent BBA graduate with hands-on experience in sales generation and customer engagement. Proven ability in affiliate marketing and content creation, with strong skills in understanding customer needs and resolving objections.</p>
+        <p>Currently working as a <strong style="color:#fff">Quality Assurance Associate at Sneakin</strong>, ensuring premium product standards.</p>
+        <div class="about-details">
+          <div class="about-detail"><i class="fas fa-user"></i><div><strong>Name</strong><span>Ashutosh Mishra</span></div></div>
+          <div class="about-detail"><i class="fas fa-map-marker-alt"></i><div><strong>Location</strong><span>New Delhi, India</span></div></div>
+          <div class="about-detail"><i class="fas fa-envelope"></i><div><strong>Email</strong><span>Mishra.ashutosh.2217@gmail.com</span></div></div>
+          <div class="about-detail"><i class="fas fa-phone"></i><div><strong>Phone</strong><span>+91-9335525344</span></div></div>
+          <div class="about-detail"><i class="fas fa-graduation-cap"></i><div><strong>Degree</strong><span>BBA, MGKVP 2025</span></div></div>
+          <div class="about-detail"><i class="fas fa-briefcase"></i><div><strong>Role</strong><span>QA Associate at Sneakin</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <span class="sl rv">Skills</span>
+    <h2 class="st rv">What I <span class="gtext">bring</span></h2>
+    <p class="ss rv">A versatile skill set combining sales, communication, and digital proficiency.</p>
+    <div class="skills-grid">
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/sales.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-handshake"></i></div>
+        <h4>Sales & Engagement</h4>
+        <ul><li>Lead Generation</li><li>Cold Calling</li><li>CRM</li></ul>
+        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>90%</span></div><div class="sb"><div class="sb-fill" data-w="90"></div></div></div>
+      </div>
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/support.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-headset"></i></div>
+        <h4>Customer Support</h4>
+        <ul><li>Query Resolution</li><li>Pre-Sales</li><li>Conflict Resolution</li></ul>
+        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>85%</span></div><div class="sb"><div class="sb-fill" data-w="85"></div></div></div>
+      </div>
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/digital.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-laptop-code"></i></div>
+        <h4>Digital & Technical</h4>
+        <ul><li>Social Media</li><li>Content Creation</li><li>Prompt Eng.</li></ul>
+        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>80%</span></div><div class="sb"><div class="sb-fill" data-w="80"></div></div></div>
+      </div>
+      <div class="sc rvs">
+        <div class="sc-bg"><img src="images/skills.jpg" alt="" loading="lazy"></div>
+        <div class="ic"><i class="fas fa-users"></i></div>
+        <h4>Soft Skills</h4>
+        <ul><li>English Proficiency</li><li>Teamwork</li><li>Problem Solving</li></ul>
+        <div class="sb-wrap"><div class="sb-lbl"><span>Proficiency</span><span>90%</span></div><div class="sb"><div class="sb-fill" data-w="90"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <span class="sl rv">Experience</span>
+    <h2 class="st rv">Where I've <span class="gtext">worked</span></h2>
+    <p class="ss rv">Professional journey building skills in sales, quality assurance, and customer engagement.</p>
+    <div class="exp-grid">
+      <div class="ec rvs">
+        <div class="img"><img src="images/sneakinn_6.jpg" alt="" loading="lazy"><div class="tag"><i class="fas fa-check-circle" style="color:#10b981"></i> Current</div></div>
+        <div class="body">
+          <div class="date">2026 — Present</div>
+          <h3>Quality Assurance Associate</h3>
+          <div class="company"><a href="https://sneakinn.in/" target="_blank" style="color:var(--secondary);text-decoration:none">Sneakin</a> &mdash; New Delhi</div>
+          <p>Perform quality inspections on premium products, ensuring adherence to brand standards.</p>
+        </div>
+      </div>
+      <div class="ec rvs">
+        <div class="img"><img src="images/sneakinn_4.jpg" alt="" loading="lazy"><div class="tag"><i class="fas fa-star" style="color:var(--gold)"></i> Freelance</div></div>
+        <div class="body">
+          <div class="date">2024 — 2025</div>
+          <h3>Sales Associate & Affiliate Marketer</h3>
+          <div class="company">Self-Employed &mdash; Remote</div>
+          <ul><li>Sales Conversion across digital channels</li><li>Engagement strategy & content creation</li><li>Customer support & query resolution</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="container">
+    <span class="sl rv">Projects</span>
+    <h2 class="st rv">Featured <span class="gtext">work</span></h2>
+    <p class="ss rv">Click to explore full details.</p>
+    <div class="proj-grid">
+      <div class="pc rvs" onclick="openProject('Consumer Behavior Analysis','<p><strong>Type:</strong> BBA Market Research Project</p><p>Survey on customer satisfaction in retail. Analyzed feedback from <strong>50+ participants</strong> to identify key drivers of customer loyalty.</p><ul><li>Designed structured questionnaires</li><li>Statistical analysis of consumer data</li><li>Presented actionable recommendations</li></ul>')">
+        <div class="th"><img src="images/project_research.jpg" alt="" loading="lazy"><i class="fas fa-chart-bar"></i></div>
+        <div class="bd"><span class="pt">Research</span><h4>Consumer Behavior Analysis</h4><p>Survey on customer satisfaction; 50+ participants.</p></div>
+      </div>
+      <div class="pc rvs" onclick="openProject('High-Conversion Campaign','<p><strong>Type:</strong> Freelance Marketing Campaign</p><p>Designed and executed a social media campaign resulting in measurable growth.</p><ul><li><strong>Result:</strong> Engagement +20%</li><li>Targeted content strategy</li><li>Responsive community management</li></ul>')">
+        <div class="th"><img src="images/project_marketing.jpg" alt="" loading="lazy"><i class="fas fa-rocket"></i></div>
+        <div class="bd"><span class="pt">Marketing</span><h4>High-Conversion Campaign</h4><p>20% engagement increase through targeted content.</p></div>
+      </div>
+      <div class="pc rvs" onclick="openProject('Sales Negotiation Workshop','<p><strong>Type:</strong> BBA Coursework</p><p>Intensive workshop on practical sales and negotiation skills.</p><ul><li>Cold-calling techniques</li><li>Conflict resolution strategies</li><li>Customer retention frameworks</li></ul>')">
+        <div class="th"><img src="images/project_sales.jpg" alt="" loading="lazy"><i class="fas fa-phone-alt"></i></div>
+        <div class="bd"><span class="pt">Workshop</span><h4>Sales Negotiation Workshop</h4><p>Roleplay on cold-calling & retention strategies.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <span class="sl rv">Education</span>
+    <h2 class="st rv">Academic <span class="gtext">background</span></h2>
+    <p class="ss rv">My educational journey through graduation.</p>
+    <div class="edu-grid">
+      <div class="edc rvs"><div class="year">2025</div><h4>BBA — Business Administration</h4><div class="school">MGKVP</div></div>
+      <div class="edc rvs"><div class="year">2022</div><h4>Senior Secondary (12th)</h4><div class="school">CBSE Board</div></div>
+      <div class="edc rvs"><div class="year">2020</div><h4>High School (10th)</h4><div class="school">CBSE Board</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QR -->
+<section id="qr">
+  <div class="container">
+    <span class="sl rv">Connect</span>
+    <h2 class="st rv">Scan to <span class="gtext">connect</span></h2>
+    <p class="ss rv">Scan any QR code to instantly connect on your preferred platform.</p>
+    <div class="qr-grid">
+      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.linkedin.com/in/ashutosh-mishra-15b762394" alt="LinkedIn QR" loading="lazy"><div class="ql"><i class="fab fa-linkedin-in" style="color:#0a66c2"></i> LinkedIn</div></div>
+      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.instagram.com/_ashutoshhhhh._" alt="Instagram QR" loading="lazy"><div class="ql"><i class="fab fa-instagram" style="color:#e4405f"></i> Instagram</div></div>
+      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=mailto:Mishra.ashutosh.2217@gmail.com" alt="Email QR" loading="lazy"><div class="ql"><i class="fas fa-envelope" style="color:var(--primary)"></i> Email</div></div>
+      <div class="qc rvs"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://sneakinn.in/" alt="Sneakinn QR" loading="lazy"><div class="ql"><i class="fas fa-store" style="color:var(--accent)"></i> Sneakinn</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="container">
+    <span class="sl rv">Testimonials</span>
+    <h2 class="st rv">What <span class="gtext">people</span> say</h2>
+    <p class="ss rv">Feedback from clients, colleagues, and collaborators.</p>
+    <div class="ts rv">
+      <div class="tt" id="tt">
+        <div class="tcard"><div class="in"><div class="qi" style="color:var(--primary)"><i class="fas fa-quote-right"></i></div><p>"Ashutosh has a remarkable ability to understand customer needs and communicate value effectively. His dedication to quality made a significant impact on our operations."</p><div class="auth"><div class="av">S</div><div class="info"><strong>Sneakin Team</strong><span>QA Lead</span></div></div></div></div>
+        <div class="tcard"><div class="in"><div class="qi" style="color:var(--primary)"><i class="fas fa-quote-right"></i></div><p>"Working with Ashutosh on affiliate marketing campaigns was excellent. He created content that resonated with our audience and drove measurable results."</p><div class="auth"><div class="av">C</div><div class="info"><strong>Client</strong><span>Marketing Partner</span></div></div></div></div>
+        <div class="tcard"><div class="in"><div class="qi" style="color:var(--primary)"><i class="fas fa-quote-right"></i></div><p>"Ashutosh's communication skills and professional approach set him apart. He consistently goes the extra mile for customer satisfaction."</p><div class="auth"><div class="av">P</div><div class="info"><strong>Peer</strong><span>BBA Colleague</span></div></div></div></div>
+      </div>
+      <div class="sdots" id="sdots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Sneakinn CTA -->
+<section>
+  <div class="container">
+    <div class="sn-banner rvs">
+      <div class="inner">
+        <i class="fas fa-store" style="font-size:1.5rem;color:var(--primary);margin-bottom:0.6rem;display:block"></i>
+        <h3>Check Out <span class="gtext">Sneakinn</span></h3>
+        <p>Premium sneaker care — where I work as a QA Associate.</p>
+        <a href="https://sneakinn.in/" target="_blank" class="btn btn-ghost"><i class="fas fa-external-link-alt"></i> Visit Sneakinn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <span class="sl rv">Contact</span>
+    <h2 class="st rv">Let's <span class="gtext">connect</span></h2>
+    <p class="ss rv">Have a question or want to collaborate? Reach out!</p>
+    <div class="contact-grid">
+      <div class="ci rvl">
+        <h3>Get in <span style="color:var(--primary)">touch</span></h3>
+        <p>Always open to new opportunities, collaborations, and conversations.</p>
+        <div class="citem"><div class="icon"><i class="fas fa-envelope"></i></div><div class="info"><strong>Email</strong><span>Mishra.ashutosh.2217@gmail.com</span></div></div>
+        <div class="citem"><div class="icon"><i class="fas fa-phone"></i></div><div class="info"><strong>Phone</strong><span>+91-9335525344</span></div></div>
+        <div class="citem"><div class="icon"><i class="fas fa-map-marker-alt"></i></div><div class="info"><strong>Location</strong><span>New Delhi, India</span></div></div>
+        <div class="citem" onclick="downloadCV()"><div class="icon"><i class="fas fa-download"></i></div><div class="info"><strong>CV / Resume</strong><span style="color:var(--primary);cursor:pointer">Download PDF &rarr;</span></div></div>
+      </div>
+      <form class="cf rvr" id="contactForm">
+        <div class="fg"><label>Your Name</label><input type="text" id="name" placeholder="John Doe" required></div>
+        <div class="fg"><label>Your Email</label><input type="email" id="email" placeholder="john@example.com" required></div>
+        <div class="fg"><label>Message</label><textarea id="message" placeholder="Tell me about your project..." required></textarea></div>
+        <div class="fg"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">Ashutosh <span class="gtext">Mishra</span></div>
+  <div class="socials">
+    <a href="mailto:Mishra.ashutosh.2217@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <a href="https://www.linkedin.com/in/ashutosh-mishra-15b762394" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://www.instagram.com/_ashutoshhhhh._" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://sneakinn.in/" target="_blank" aria-label="Sneakinn"><i class="fas fa-store"></i></a>
+  </div>
+  <p>&copy; 2026 Ashutosh Mishra</p>
+</footer>
+
+<script>
+// Loader
+window.addEventListener('load',()=>{setTimeout(()=>{const l=document.getElementById('loader');if(l){l.style.opacity='0';l.style.visibility='hidden'}},400)});
+
+// Custom Circle Cursor
+const cc=document.getElementById('customCursor');
+const sw=document.getElementById('snowTrail');
+if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  cc.style.display='block';
+  document.addEventListener('mousemove',(e)=>{
+    cc.style.left=e.clientX+'px';
+    cc.style.top=e.clientY+'px';
+    // Snow trail
+    for(let i=0;i<2;i++){
+      const f=document.createElement('div');f.className='flake';
+      const s=Math.random()*3+2;f.style.width=s+'px';f.style.height=s+'px';
+      f.style.left=(e.clientX+(Math.random()-0.5)*16)+'px';
+      f.style.top=(e.clientY+(Math.random()-0.5)*16)+'px';
+      f.style.setProperty('--sx',(Math.random()-0.5)*30+'px');
+      f.style.setProperty('--sy',(Math.random()*-40-15)+'px');
+      f.style.background=Math.random()>0.5?'rgba(255,255,255,0.5)':'rgba(168,85,255,0.3)';
+      sw.appendChild(f);setTimeout(()=>f.remove(),700);
+    }
+  });
+  // Hover effect on interactive elements
+  document.querySelectorAll('a,button,.btn,.pc,.ec,.qc,.edc,.hamburger,.sdot').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cc.classList.add('hover'));
+    el.addEventListener('mouseleave',()=>cc.classList.remove('hover'));
+  });
+}
+
+// Particles
+(function(){
+  const c=document.getElementById('particles');
+  const colors=['rgba(168,85,255,0.25)','rgba(244,63,94,0.18)','rgba(6,182,212,0.15)','rgba(255,255,255,0.12)'];
+  for(let i=0;i<60;i++){
+    const p=document.createElement('div');p.className='fly';
+    const s=Math.random()*4+2;p.style.width=s+'px';p.style.height=s+'px';
+    if(Math.random()>0.7){
+      p.style.borderRadius='0';
+      p.style.clipPath='polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)';
+    }
+    p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';
+    p.style.setProperty('--tx',(Math.random()-0.5)*400+'px');
+    p.style.setProperty('--ty',(Math.random()-0.5)*400+'px');
+    p.style.animationDuration=Math.random()*12+10+'s';
+    p.style.animationDelay=Math.random()*15+'s';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.appendChild(p);
+  }
+})();
+
+// Hamburger
+const hb=document.getElementById('hamburger');
+const nl=document.getElementById('navLinks');
+hb.addEventListener('click',()=>{hb.classList.toggle('active');nl.classList.toggle('open')});
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hb.classList.remove('active');nl.classList.remove('open')}));
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50)});
+
+// Reveal
+const ro=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:0.1});
+document.querySelectorAll('.rv,.rvl,.rvr,.rvs').forEach(e=>ro.observe(e));
+
+// Skill bars
+const so=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.style.width=e.target.dataset.w+'%'})},{threshold:0.4});
+document.querySelectorAll('.sb-fill').forEach(e=>so.observe(e));
+
+// Testimonials
+const tt=document.getElementById('tt');const sd=document.getElementById('sdots');const tc=tt.querySelectorAll('.tcard');let cs=0;
+tc.forEach((_,i)=>{const d=document.createElement('button');d.className='sdot'+(i===0?' active':'');d.onclick=()=>gs(i);sd.appendChild(d)});
+function gs(i){cs=i;tt.style.transform='translateX(-'+i*100+'%)';sd.querySelectorAll('.sdot').forEach((d,j)=>d.classList.toggle('active',j===i))}
+setInterval(()=>gs((cs+1)%tc.length),4500);
+
+// Modal
+function openProject(t,b){document.getElementById('modalTitle').innerHTML='<i class="fas fa-folder-open" style="color:var(--primary)"></i> '+t;document.getElementById('modalBody').innerHTML=b;document.getElementById('projectModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('projectModal').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('projectModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=document.getElementById('name').value.trim();
+  const em=document.getElementById('email').value.trim();
+  const m=document.getElementById('message').value.trim();
+  if(n&&em&&m)window.location.href='mailto:Mishra.ashutosh.2217@gmail.com?subject=Portfolio Inquiry from '+n+'&body='+encodeURIComponent(m+'\n\n— '+n+'\n'+em);
+});
+
+// Download CV
+function downloadCV(){const a=document.createElement('a');a.href='Ashutosh_Mishra_CV.pdf';a.download='Ashutosh_Mishra_CV.pdf';document.body.appendChild(a);a.click();document.body.removeChild(a)}
+document.getElementById('downloadCV').addEventListener('click',e=>{e.preventDefault();downloadCV()});
+
+// Touch device detection
+if('ontouchstart' in window){document.body.style.cursor='auto'}
+</script>
+</body>
+</html>
